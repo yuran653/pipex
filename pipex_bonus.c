@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 10:33:41 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/01/29 18:25:10 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/01/29 21:47:07 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	execute(char *argv, char **env)
 	cmds = ft_split(argv, ' ');
 	if (!cmds)
 		error_malloc();
-	if (access(cmds[0], F_OK) == 0)
+	if (access(cmds[0], X_OK) == 0)
 	{
 		execve(cmds[0], cmds, env);
 		error_command(cmds);
