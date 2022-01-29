@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/25 01:28:47 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/01/27 21:11:50 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/01/30 01:47:16 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,17 @@ char	**find_path(char **env)
 	return (NULL);
 }
 
-char	*get_exec_path(int i, char **cmds_path, char *cmds)
+char	*get_exec_path(int i, char **cmds_path, char **cmds)
 {
 	char	*exec_path;
 	char	*slash_cmd;
 
-	slash_cmd = ft_strjoin("/", cmds);
+	if (!cmds[0])
+		error_command(cmds);
+	slash_cmd = ft_strjoin("/", cmds[0]);
 	if (!slash_cmd)
 	{
+		free_array(cmds);
 		free_array(cmds_path);
 		error_malloc();
 	}
@@ -59,6 +62,7 @@ char	*get_exec_path(int i, char **cmds_path, char *cmds)
 	if (!exec_path)
 	{
 		free(slash_cmd);
+		free_array(cmds);
 		free_array(cmds_path);
 		error_malloc();
 	}
@@ -75,7 +79,7 @@ char	*get_path(char **env, char **cmds)
 	cmds_path = find_path(env);
 	while (cmds_path[++i])
 	{
-		exec_path = get_exec_path(i, cmds_path, cmds[0]);
+		exec_path = get_exec_path(i, cmds_path, cmds);
 		if (access(exec_path, F_OK) == 0)
 		{
 			free_array(cmds_path);

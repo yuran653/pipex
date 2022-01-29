@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 11:15:27 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/01/29 21:05:26 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/01/30 01:26:20 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		validation(int argc, char **argv);
 int		heredoc(char **argv);
 int		save_heredoc(char **buff);
 char	*get_path(char **env, char **cmds);
-char	*get_exec_path(int i, char **cmds_path, char *cmds);
+char	*get_exec_path(int i, char **cmds_path, char **cmds);
 char	**find_path(char **env);
 void	free_array(char **arr);
 void	error_file(char *file_name, int fd);

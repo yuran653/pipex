@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/25 01:27:19 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/01/29 18:25:02 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/01/30 01:56:26 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,12 @@ void	error_command(char **cmds)
 {
 	char	*str_err;
 
+	if (!cmds[0])
+	{
+		perror("\e[1;31mERROR:\e[0m command not found");
+		free_array(cmds);
+		exit(EXIT_SUCCESS);
+	}
 	str_err = ft_strjoin("\e[1;31mERROR:\e[0m command not found: ", cmds[0]);
 	if (!str_err)
 		error_malloc();
