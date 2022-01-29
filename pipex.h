@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 11:15:27 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/01/27 13:45:32 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/01/29 18:36:07 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 void	pipex(char *argv, char **env);
 void	execute(char *argv, char **env);
+void	execute_last(char *argv, char **env);
 void	validation(int argc);
 char	*get_path(char **env, char **cmds);
 char	*get_exec_path(int i, char **cmds_path, char *cmds);

@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 10:33:41 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/01/27 21:11:38 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/01/29 18:36:20 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,17 @@ void	execute(char *argv, char **env)
 	free_array(cmds);
 	free(path);
 	error_common();
+}
+
+void	execute_last(char *argv, char **env)
+{
+	pid_t	pid;
+
+	pid = fork();
+	if (pid == -1)
+		error_common();
+	if (pid == 0)
+		execute(argv, env);
 }
 
 void	pipex(char *argv, char **env)
@@ -76,7 +87,7 @@ int	main(int argc, char **argv, char **env)
 		error_common();
 	while (i < argc - 2)
 		pipex(argv[i++], env);
-	execute(argv[i], env);
+	execute_last(argv[i], env);
 	if (close(fd[0]) == -1)
 		error_common();
 	if (close(fd[1]) == -1)
