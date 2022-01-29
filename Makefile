@@ -6,7 +6,7 @@
 #    By: jgoldste <jgoldste@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/18 12:26:15 by jgoldste          #+#    #+#              #
-#    Updated: 2022/01/28 15:21:31 by jgoldste         ###   ########.fr        #
+#    Updated: 2022/01/29 19:43:42 by jgoldste         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ libft		:
 				$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@ -MD
 
 $(NAME)		:	$(OBJS) $(LIB)
-#				ifeq ($(SRCS), pipex.c		pipex_utils.c		error.c		validation.c)
+#				ifeq ($(strip $(SRCS)),$(strip $(SRCS_B)))
 #					$(CC) $(CFLAGS) $(INCLUDES) $(LIB) -o $(NAME) $(OBJS)
 #					@echo ${GREEN} "\n\tPipex bonus is compiled\n" ${END}
 #				else
@@ -66,7 +66,7 @@ $(NAME)		:	$(OBJS) $(LIB)
 
 bonus		:	
 				@$(RM) $(OBJS) $(D_FILES)
-				make SRCS='$(SRCS_B)' HEADER='$(HEADER_B)'
+				@make SRCS='$(SRCS_B)' HEADER='$(HEADER_B)'
 
 clean		:	
 				@$(RM) $(OBJS) $(OBJS_B) $(D_FILES) $(D_FILES_B)

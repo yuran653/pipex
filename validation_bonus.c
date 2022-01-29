@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 04:36:03 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/01/28 16:39:49 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/01/29 20:44:42 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	validation(int argc, char **argv)
 		ft_putstr_fd("] should be at least [4]\n", STDERR_FILENO);
 		exit(EXIT_SUCCESS);
 	}
-	if (ft_strncmp(argv[1], "here_doc", ft_strlen(argv[2])) == 0)
+	if (ft_strncmp(argv[1], "here_doc", ft_strlen(argv[2])) == 0
+		&& ft_strlen(argv[1]) == 8)
 	{
 		if (argc != 6)
 		{
