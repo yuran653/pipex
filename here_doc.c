@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 17:57:36 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/01/30 00:20:22 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/01/30 02:17:30 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	heredoc(char **argv)
 		error_malloc();
 	while (++i >= 0)
 	{
+		ft_putstr_fd("here_doc > ", STDOUT_FILENO);
 		buff[i] = get_next_line(STDIN_FILENO);
 		if (!buff[i])
 			i--;
