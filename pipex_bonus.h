@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 11:15:27 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/01/29 17:12:05 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/01/29 18:04:06 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,9 @@ void	pipex(char *argv, char **env);
 void	execute(char *argv, char **env);
 void	execute_last(char *argv, char **env);
 void	close_fd(int *fd);
-// void	close_fd(int argc, char **argv, int *fd);
 int		validation(int argc, char **argv);
 int		heredoc(char **argv);
-// char	**heredoc(int argc, char **argv);
 int		save_heredoc(char **line);
-// char	*save_heredoc(int argc, char **argv, char **line);
-// char	*check_name(int argc, char **argv);
 char	*get_path(char **env, char **cmds);
 char	*get_exec_path(int i, char **cmds_path, char *cmds);
 char	**find_path(char **env);

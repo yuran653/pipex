@@ -6,23 +6,14 @@
 /*   By: jgoldste <jgoldste@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 10:33:41 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/01/29 17:08:29 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/01/29 18:02:14 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-// void	close_fd(int argc, char **argv, int *fd)
 void	close_fd(int *fd)
 {
-	// if (access(".temp1", F_OK) == 0)
-	// 	if (ft_strncmp(".temp1", argv[argc - 1], ft_strlen(argv[argc - 1])) != 0)
-	// 		if (unlink(".temp1") == -1)
-	// 			error_common();
-	// if (access(".temp2", F_OK) == 0)
-	// 	if (ft_strncmp(".temp2", argv[argc - 1], ft_strlen(argv[argc - 1])) != 0)
-	// 		if (unlink(".temp2") == -1)
-	// 			error_common();
 	if (close(fd[0]) == -1)
 		error_common();
 	if (close(fd[1]) == -1)
@@ -95,7 +86,6 @@ int	main(int argc, char **argv, char **env)
 	i = 2;
 	if (validation(argc, argv))
 	{
-		// argv[1] = heredoc(argc, argv);
 		fd[0] = heredoc(argv);
 		i++;
 	}
@@ -110,7 +100,6 @@ int	main(int argc, char **argv, char **env)
 		error_common();
 	if (dup2(fd[1], STDOUT_FILENO) == -1)
 		error_common();
-	// close_fd(argc, argv, fd);
 	while (i < argc - 2)
 		pipex(argv[i++], env);
 	execute_last(argv[i], env);
