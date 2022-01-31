@@ -6,50 +6,68 @@
 /*   By: jgoldste <jgoldste@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 17:57:36 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/01/30 02:17:30 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/01/31 18:47:55 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-int	save_heredoc(char **buff)
+int	check_value(char *line, char *argv)
+{
+	if (ft_strncmp(line, argv, ft_strlen(argv)) == 0
+		&& ft_strncmp(line, "\n", 1) != 0
+		&& ft_strlen(line) - 1 == ft_strlen(argv))
+		return (1);
+	else
+		return (0);
+}
+
+char	*join_buff_line(char *buff, char *line)
+{
+	char	*buff_new;
+
+	buff_new = ft_strjoin(buff, line);
+	free(buff);
+	free(line);
+	return (buff_new);
+}
+
+int	save_heredoc(char *buff)
 {
 	int	pipe_fd[2];
-	int	i;
 
-	i = -1;
 	if (pipe(pipe_fd) < 0)
 		error_common();
-	while (buff[++i])
-		ft_putstr_fd(buff[i], pipe_fd[1]);
+	ft_putstr_fd(buff, pipe_fd[1]);
 	if (close(pipe_fd[1]) == -1)
 		error_common();
-	free_array(buff);
+	free(buff);
 	return (pipe_fd[0]);
 }
 
 int	heredoc(char **argv)
 {
 	int		i;
-	char	**buff;
+	char	*line;
+	char	*buff;
 
-	i = -1;
-	buff = (char **)malloc(sizeof(char *) * 1000);
+	i = 0;
+	line = "\0";
+	buff = "\0";
+	buff = ft_strjoin(buff, line);
 	if (!buff)
 		error_malloc();
-	while (++i >= 0)
+	while (++i > 0)
 	{
 		ft_putstr_fd("here_doc > ", STDOUT_FILENO);
-		buff[i] = get_next_line(STDIN_FILENO);
-		if (!buff[i])
-			i--;
-		else if (ft_strncmp(buff[i], argv[2], ft_strlen(argv[2])) == 0
-			&& ft_strncmp(buff[i], "\n", 1) != 0
-			&& ft_strlen(buff[i]) - 1 == ft_strlen(argv[2]))
+		line = get_next_line(STDIN_FILENO);
+		if (check_value(line, argv[2]))
 		{
-			buff[i] = NULL;
+			free(line);
 			return (save_heredoc(buff));
 		}
+		else
+			buff = join_buff_line(buff, line);
 	}
 	return (0);
 }

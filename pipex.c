@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 10:33:41 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/01/29 18:36:20 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/01/31 16:26:17 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	main(int argc, char **argv, char **env)
 	int	i;
 
 	i = 2;
-	validation(argc);
+	validation(argc, env);
 	fd[0] = open(argv[1], O_RDONLY);
 	error_file(argv[1], fd[0]);
 	fd[1] = open(argv[argc - 1], O_RDWR | O_CREAT | O_TRUNC, 0644);

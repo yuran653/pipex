@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 10:33:41 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/01/30 02:08:05 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/01/31 18:48:27 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	main(int argc, char **argv, char **env)
 	int	i;
 
 	i = 2;
-	if (validation(argc, argv))
+	if (validation(argc, argv, env))
 	{
 		fd[0] = heredoc(argv);
 		i++;

@@ -6,14 +6,23 @@
 /*   By: jgoldste <jgoldste@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 04:36:03 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/01/29 20:44:42 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/01/31 16:21:57 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-int	validation(int argc, char **argv)
+void	error_env(char **env)
 {
+	execve(NULL, NULL, env);
+	perror("\e[1;31mERROR:\e[0m environment not found");
+	exit(EXIT_FAILURE);
+}
+
+int	validation(int argc, char **argv, char **env)
+{
+	if (!env)
+		error_env(env);
 	if (argc < 5)
 	{
 		ft_putstr_fd("\e[1;31mERROR:\e[0m not enough arguments. Instead of [",
