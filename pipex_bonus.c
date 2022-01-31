@@ -6,19 +6,11 @@
 /*   By: jgoldste <jgoldste@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 10:33:41 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/01/31 18:48:27 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/01/31 23:11:46 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
-
-void	close_fd(int *fd)
-{
-	if (close(fd[0]) == -1)
-		error_common();
-	if (close(fd[1]) == -1)
-		error_common();
-}
 
 void	execute(char *argv, char **env)
 {
@@ -78,6 +70,14 @@ void	pipex(char *argv, char **env)
 	}
 }
 
+void	duplicate(int *fd)
+{
+	if (dup2(fd[0], STDIN_FILENO) == -1)
+		error_common();
+	if (dup2(fd[1], STDOUT_FILENO) == -1)
+		error_common();
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	int	fd[2];
@@ -87,19 +87,18 @@ int	main(int argc, char **argv, char **env)
 	if (validation(argc, argv, env))
 	{
 		fd[0] = heredoc(argv);
+		fd[1] = open(argv[argc - 1], O_RDWR | O_CREAT | O_APPEND, 0644);
+		error_file(argv[argc - 1], fd[1]);
 		i++;
 	}
 	else
 	{
 		fd[0] = open(argv[1], O_RDONLY);
 		error_file(argv[1], fd[0]);
+		fd[1] = open(argv[argc - 1], O_RDWR | O_CREAT | O_TRUNC, 0644);
+		error_file(argv[argc - 1], fd[1]);
 	}
-	fd[1] = open(argv[argc - 1], O_RDWR | O_CREAT | O_TRUNC, 0644);
-	error_file(argv[argc - 1], fd[1]);
-	if (dup2(fd[0], STDIN_FILENO) == -1)
-		error_common();
-	if (dup2(fd[1], STDOUT_FILENO) == -1)
-		error_common();
+	duplicate(fd);
 	while (i < argc - 2)
 		pipex(argv[i++], env);
 	execute_last(argv[i], env);

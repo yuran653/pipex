@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 17:57:36 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/01/31 18:47:55 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/01/31 20:56:35 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 int	check_value(char *line, char *argv)
 {
-	if (ft_strncmp(line, argv, ft_strlen(argv)) == 0
-		&& ft_strncmp(line, "\n", 1) != 0
-		&& ft_strlen(line) - 1 == ft_strlen(argv))
+	unsigned long	len;
+
+	len = ft_strlen(argv);
+	if (ft_strncmp(line, argv, len) == 0 && ft_strncmp(line, "\n", 1) != 0
+		&& ft_strlen(line) - 1 == len)
 		return (1);
 	else
 		return (0);
@@ -52,9 +54,7 @@ int	heredoc(char **argv)
 	char	*buff;
 
 	i = 0;
-	line = "\0";
-	buff = "\0";
-	buff = ft_strjoin(buff, line);
+	buff = ft_strdup("\0");
 	if (!buff)
 		error_malloc();
 	while (++i > 0)

@@ -6,11 +6,19 @@
 /*   By: jgoldste <jgoldste@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 04:36:03 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/01/31 16:21:57 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/01/31 23:12:18 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
+
+void	close_fd(int *fd)
+{
+	if (close(fd[0]) == -1)
+		error_common();
+	if (close(fd[1]) == -1)
+		error_common();
+}
 
 void	error_env(char **env)
 {

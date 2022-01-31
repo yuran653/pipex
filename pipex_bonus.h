@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 11:15:27 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/01/31 18:45:19 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/01/31 23:15:09 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # endif
 
 void	pipex(char *argv, char **env);
+void	duplicate(int *fd);
 void	execute(char *argv, char **env);
 void	execute_last(char *argv, char **env);
 void	close_fd(int *fd);
@@ -37,6 +38,7 @@ char	*get_exec_path(int i, char **cmds_path, char **cmds);
 char	**find_path(char **env);
 void	free_array(char **arr);
 void	error_file(char *file_name, int fd);
+void	error_env(char **env);
 void	error_command(char **cmds);
 void	error_malloc(void);
 void	error_path(void);
