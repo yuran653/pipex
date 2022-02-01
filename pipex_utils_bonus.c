@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/25 01:28:47 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/01/31 20:02:32 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/01/31 23:35:58 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@ void	free_array(char **arr)
 	while (arr[++i])
 		free(arr[i]);
 	free(arr);
+}
+
+void	free_array2(char **arr1, char **arr2)
+{
+	free_array(arr1);
+	free_array(arr2);
 }
 
 char	**find_path(char **env)
@@ -54,16 +60,14 @@ char	*get_exec_path(int i, char **cmds_path, char **cmds)
 	slash_cmd = ft_strjoin("/", cmds[0]);
 	if (!slash_cmd)
 	{
-		free_array(cmds);
-		free_array(cmds_path);
+		free_array2(cmds, cmds_path);
 		error_malloc();
 	}
 	exec_path = ft_strjoin(cmds_path[i], slash_cmd);
 	if (!exec_path)
 	{
 		free(slash_cmd);
-		free_array(cmds);
-		free_array(cmds_path);
+		free_array2(cmds, cmds_path);
 		error_malloc();
 	}
 	return (exec_path);

@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 10:33:41 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/01/31 23:11:46 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/02/01 18:39:56 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,14 @@ void	execute(char *argv, char **env)
 	char	*path;
 	char	**cmds;
 
-	cmds = ft_split(argv, ' ');
+	if (!argv[0])
+	{
+		cmds = (char **)malloc(sizeof(char *) * 2);
+		cmds[0] = ft_strdup("cat");
+		cmds[1] = NULL;
+	}
+	else
+		cmds = ft_split(argv, ' ');
 	if (!cmds)
 		error_malloc();
 	if (access(cmds[0], X_OK) == 0)
