@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 17:57:36 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/02/01 02:05:15 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/02/01 23:31:42 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ int	check_value(char *line, char *argv)
 	unsigned long	len;
 
 	len = ft_strlen(argv);
-	if (ft_strncmp(line, argv, len) == 0 && ft_strncmp(line, "\n", 1) != 0
-		&& ft_strlen(line) - 1 == len)
+	if (ft_strncmp(line, argv, len) == 0 && ft_strlen(line) - 1 == len)
 	{
 		free(line);
 		return (1);
